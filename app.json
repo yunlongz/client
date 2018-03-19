@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/start/start",
+    "pages/index/index",
+    "pages/addCgi/addCgi",
+    "pages/signup/signup",
+    "pages/notice/show"
+  ],
+  "window":{
+    "backgroundColor":"#F6F6F6",
+    "backgroundTextStyle":"red",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "成开活动报名",
+    "navigationBarTextStyle":"black"
+  }
+}

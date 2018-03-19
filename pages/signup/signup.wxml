@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- 用户登录测试 -->
+    <view class="userinfo" >
+        <image
+            class="userinfo-avatar"
+            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
+            background-size="cover"
+        ></image>
+        <view>
+            <text class="userinfo-nickname">{{logged ? userInfo.nickName : ''}}{{hasRealName?' ('+realName+')' : ''}}</text>
+            <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
+        </view>
+          <view wx:if="{{!loading && !isSignupEnd}}" class='sign-button-box'> 
+            <button  class='sign-button' bindtap='signupActivity' disabled="{{isSigned}}" type="primary">{{isSigned ? "已报名" : "我要报名"}}</button>
+         </view>
+    </view>
+    <view class='list-header'>
+         <text class='gray font-small'>已报列表</text>
+    </view>
+    <view   class='sign-list'>
+      
+      <view wx:key="unique" wx:for="{{signList}}" class='sign-list-item'>
+        <view><text class='list-index'>{{index+1}}</text></view>
+          <view><image class="userinfo-avatar"
+          src="{{item.avatar_url}}"
+          background-size="cover"></image></view>
+          <view><text>{{item.realname}}</text></view>
+          <view style='margin-left:10rpx'><text class='font-small gray' >({{item.department}})</text></view>
+      </view>
+     
+    </view>
+    <view wx:if="{{loadingData}}" class='loading-box'>
+      <view class='demo2'></view>
+      <view class='demo2'></view>
+      <view class='demo2'></view>
+      <view class='demo2'></view>
+      <view class='demo2'></view>
+     </view>  
+    <modal hidden="{{hiddenmodalput}}" title="内容仅在第一次登录时出现" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{department}}" range="{{array}}">
+        <view class="picker">
+          当前选择：{{array[department]}}
+        </view>
+      </picker>
+    </view>
+      <input class='input-name' maxlength="10" type="text" bindblur='bindBlur' bindinput="bindKeyInput"  type='text'placeholder="请务必填写真实姓名（必填）" /> 
+    </modal>
+    
+      
+</view>

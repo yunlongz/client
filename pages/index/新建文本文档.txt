@@ -1,0 +1,33 @@
+<view class='activity-box-date-title'>
+      <text>羽毛球活动</text>
+    </view>
+    <view class='activity-box-date'>
+      <navigator class='activity-box-date-item' url="../signup/signup?title=羽毛球&activityid=1&" hover-class="navigator-hover">
+        <text>周一</text>
+        <text class='gray font-small'>12:00-13:30</text>
+        <text class='font-small gray'>已报  <text style='color:red'>{{totalSignedList.monday.length > 0 ? totalSignedList.monday[0].totalCount : 0 }}</text> 人</text>
+        <view class='sign-list-item-thumbnail'>
+          <image wx:key="unique" wx:for="{{totalSignedList.monday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
+        </view>
+
+      </navigator>
+      <navigator class='activity-box-date-item' url="../signup/signup?title=羽毛球&activityid=3&" hover-class="navigator-hover">
+        <text>周三</text>
+        <text class='gray font-small'>12:00-13:30</text>
+        <text class='font-small gray'>已报  <text style='color:red'>{{totalSignedList.wednesday.length > 0 ? totalSignedList.wednesday[0].totalCount : 0 }}</text> 人</text>
+        <view class='sign-list-item-thumbnail'>
+          <image wx:key="unique" wx:for="{{totalSignedList.wednesday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
+        </view>
+
+      </navigator>
+      <navigator class='activity-box-date-item' url="../signup/signup?title=羽毛球&activityid=4&" hover-class="navigator-hover">
+        <text>周四</text>
+        <text class='gray font-small'>12:00-13:30</text>
+        <text class='font-small gray'>已报  <text style='color:red'>{{totalSignedList.thursday.length > 0 ? totalSignedList.thursday[0].totalCount : 0 }}</text> 人</text>
+        <view class='sign-list-item-thumbnail'>
+          <image wx:key="unique" wx:for="{{totalSignedList.thursday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
+        </view>
+
+      </navigator>
+
+    </view>
