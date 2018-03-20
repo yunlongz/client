@@ -28,27 +28,78 @@ Page({
     lastLoggedTime: moment(wx.getStorageSync('logs')[0]).format("LLL"),
     totalCount: 0,
     activityName: '羽毛球',
-    totalSignedList: {},
-    categories: [
-      { name: "羽毛球", id: 0 },
-      { name: "气排球", id: 1 },
-      { name: "台球", id: 2 },
-      { name: "桌游", id: 3 },
-      { name: "乒乓球", id: 4 },
-      { name: "足球", id: 5 },
-      { name: "篮球", id: 6 },
-    ],
+    enName:'badminton',
+    totalSignedList: ((list) => {
+      let newSignedList = {}
+      let keylist = Object.keys(list)
+      for (var i = 0; i < keylist.length; i++) {
+        newSignedList[keylist[i]] = {}
+      }
+      return newSignedList
+    })(config.activityTemplateData),
+    categories: config.categories,
     activeCategoryId: 0,
     actived: 0,
     isSignupEnd: [false, false, false, false, false, false, false],
-    serverDate:moment()
+    serverDate: moment(),
+    activityTemplateData: ((list) => {
+      let newList = []
+      // console.log("&&&&&",Object.keys(list))
+      let keylist = Object.keys(list)
+      for (var i = 0; i < keylist.length; i++) {
+        for (let j = 0; j < list[keylist[i]].length; j++) {
+          if (list[keylist[i]][j]['activityid'] == 1) {
+            list[keylist[i]][j]['activityDate'] = '周一';
+            list[keylist[i]][j]['activityDateEn'] = 'monday';
+
+          }
+          if (list[keylist[i]][j]['activityid'] == 2) {
+            list[keylist[i]][j]['activityDate'] = '周二';
+            list[keylist[i]][j]['activityDateEn'] = 'tuesday';
+          }
+          if (list[keylist[i]][j]['activityid'] == 3) {
+            list[keylist[i]][j]['activityDate'] = '周三';
+            list[keylist[i]][j]['activityDateEn'] = 'wednesday';
+          }
+          if (list[keylist[i]][j]['activityid'] == 4) {
+            list[keylist[i]][j]['activityDate'] = '周四';
+            list[keylist[i]][j]['activityDateEn'] = 'thursday';
+          }
+          if (list[keylist[i]][j]['activityid'] == 5) {
+            list[keylist[i]][j]['activityDate'] = '周五';
+            list[keylist[i]][j]['activityDateEn'] = 'friday';
+          }
+          if (list[keylist[i]][j]['activityid'] == 6) {
+            list[keylist[i]][j]['activityDate'] = '周六';
+            list[keylist[i]][j]['activityDateEn'] = 'saturday';
+          }
+          if (list[keylist[i]][j]['activityid'] == 7) {
+            list[keylist[i]][j]['activityDate'] = '周天';
+            list[keylist[i]][j]['activityDateEn'] = 'sunday';
+          }
+          list[keylist[i]][j]['name'] = keylist[i]
+        }
+      }
+      console.log(list)
+      return list
+
+    })(config.activityTemplateData)
   },
 
   tabClick: function (e) {
+    console.log(e)
     this.setData({
       activeCategoryId: e.currentTarget.id,
       actived: e.currentTarget.id,
+      activityName: e.currentTarget.dataset.name,
+      enName: e.currentTarget.dataset.enname
     });
+    console.log("------------------>", this.data.totalSignedList[e.currentTarget.dataset.enname])
+    if (util.isEmptyObject(this.data.totalSignedList[e.currentTarget.dataset.enname])){
+      this.getActivity()
+    }
+    
+
     //this.getGoodsList(this.data.activeCategoryId);
   },
   bindGoToSignupList: function (e) {
@@ -76,8 +127,11 @@ Page({
 
         let groupedList = that.groupListByActivityAndWeek(result.data.list, result.data.listCount)
         console.log('magic list ', groupedList)
+        let obj = that.data.totalSignedList
+        obj[that.data.enName] = groupedList
+        console.log(obj)
         that.setData({
-          totalSignedList: groupedList,
+          totalSignedList: obj,
           // totalPage: result.data.totalPage,
           // totalCount:result.data.totalCount
         })
@@ -95,9 +149,9 @@ Page({
       sunday: []
 
     }
-    function limit(num,array){
-      if(array.length > num){
-        array = array.slice(0,num)
+    function limit(num, array) {
+      if (array.length > num) {
+        array = array.slice(0, num)
       }
       return array
     }
@@ -113,8 +167,8 @@ Page({
       for (let i = 0; i < list.length; i++) {
         if (list[i].activityid == 1) {
           groupCount(i, 1)
-        
-          if (newListObject.monday.length < config.constants.showLimitNum){
+
+          if (newListObject.monday.length < config.constants.showLimitNum) {
             newListObject.monday.push(list[i])
           }
         }
@@ -163,9 +217,9 @@ Page({
   getNotice: function () {
     var that = this;
     this.setData({
-      noticeList:[{
-        id:1,title:"羽毛球比赛通知"
-      },{
+      noticeList: [{
+        id: 1, title: "羽毛球比赛通知"
+      }, {
         id: 2, title: "气排球比赛通知"
       }]
     })
@@ -189,14 +243,14 @@ Page({
     for (let i = 1; i < this.data.isSignupEnd.length + 1; i++) {
       newList.push(i < moment(timestamp).format("E"))
     }
-    
+
     return newList
   },
-  
+
   onLoad: function () {
     console.log('onLoad')
     this.getNotice()
-   
+
     var that = this
     //调用应用实例的方法获取全局数据
     if (this.data.logged) return
@@ -249,20 +303,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('*****************************************************************')
+    console.log('*****************************************************************', config)
     var that = this
     wx.request({
       url: config.service.getServerDateUrl,
-      success:function(res){
-        console.log(res)
+      success: function (res) {
         let isSignupEndList = that.getEndDay(res.data.timestamp)
+        console.log(isSignupEndList)
         that.setData({
           isSignupEnd: isSignupEndList,
           serverDate: res.data.timestamp
         })
       }
     })
-    
+
   },
 
   /**

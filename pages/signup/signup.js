@@ -39,7 +39,8 @@ Page({
       login: true,
       data: {
         currentPage: that.data.currentPage,
-        currentDate:that.data.currentDate
+        currentDate:that.data.currentDate,
+        activityName: that.data.activityname
       },
       success(result) {
         console.log("获取当前报名列表", result)
@@ -265,7 +266,8 @@ Page({
       url: config.service.isSignedUrl,
       data: {
         openId: app.globalData.openId,
-        currentDate: that.data.currentDate
+        currentDate: that.data.currentDate,
+        activityname: that.data.activityname
       },
       success:function(res){
         console.log("isSigned------------->",res)
@@ -338,7 +340,7 @@ Page({
       wx.request({
         url: config.service.getUserInfoUrl,
         data: {
-          openId: results.openId
+          openId: results.openId,
         },
         success: function (res) {
           console.log("*****>>>", res)

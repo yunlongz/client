@@ -34,7 +34,6 @@ page {
   align-items: center
 }
 .userinfo, .uploader, .tunnel {
-    margin-top: 40rpx;
     height: 140rpx;
     width: 100%;
     background: #FFF;

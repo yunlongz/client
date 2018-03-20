@@ -19,30 +19,30 @@ const formatNumber = n => {
 
 // 显示繁忙提示
 var showBusy = text => wx.showToast({
-    title: text,
-    icon: 'loading',
-    duration: 10000
+  title: text,
+  icon: 'loading',
+  duration: 10000
 })
 
 // 显示成功提示
 var showSuccess = text => wx.showToast({
-    title: text,
-    icon: 'success'
+  title: text,
+  icon: 'success'
 })
 
 // 显示失败提示
 var showModel = (title, content) => {
-    wx.hideToast();
+  wx.hideToast();
 
-    wx.showModal({
-        title,
-        content: JSON.stringify(content),
-        showCancel: false
-    })
+  wx.showModal({
+    title,
+    content: JSON.stringify(content),
+    showCancel: false
+  })
 }
 
-const getCurrentDate = (serverDate,day) => {
- 
+const getCurrentDate = (serverDate, day) => {
+
   return moment(Number(serverDate)).startOf('week').add(parseInt(day) - 1, 'days').format('YYYY-MM-DD')
 }
 
@@ -55,8 +55,14 @@ const changeDepartmentNameByCode = (code) => {
     case 3: return department = "CSR";
     case 4: return department = "产品";
     case 5: return department = "技术支持部";
-    default: return department 
+    default: return department
   }
 }
+const isEmptyObject = (obj) => {
+  for (var key in obj) {
+    return false
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, getCurrentDate, changeDepartmentNameByCode}
+  };
+  return true
+};
+module.exports = { formatTime, showBusy, showSuccess, showModel, getCurrentDate, changeDepartmentNameByCode, isEmptyObject}

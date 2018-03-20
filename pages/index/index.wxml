@@ -14,7 +14,7 @@
   <view class="type-container">
     <scroll-view class="type-navbar" scroll-x="true">
       <view class="type-box" wx:for-items="{{categories}}" wx:key="id">
-        <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
+        <view id="{{item.id}}" data-name="{{item.name}}" data-enName="{{item.enName}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
           {{item.name}}
         </view>
       </view>
@@ -30,14 +30,15 @@
       </navigator>
     </swiper>
   </view>
-  <view class="activity-container" hidden="{{!(0 == actived)}}">
-    <!--周一  -->
-    <view class='activity-box' bindtap="bindGoToSignupList" data-activityid="1" data-title='羽毛球' data-is-signup-end="{{isSignupEnd[0]}}" hover-class="navigator-hover">
+
+  <view wx:key="unique"  wx:for-item="itemName" class="activity-container" hidden="{{!(itemName.id == actived)}}" wx:for="{{categories}}">
+      <!-- ----------------- 循环代码片段 start ----------- -->
+    <view wx:key="unique"  wx:for-item="item" wx:for="{{activityTemplateData[itemName.enName]}}" class='activity-box' bindtap="bindGoToSignupList" data-activityid="{{item.activityid}}" data-title="{{item.title}}" data-is-signup-end="{{isSignupEnd[item.activityid]}}" hover-class="navigator-hover">
 
       <view class='activity-date-box'>
         <view class='activity-date-box-left'>
-          <text class='activity-date'> 周一 </text>
-          <text class='gray font-small ml-20'>(12：00 - 13：30)</text>
+          <text class='activity-date'> {{item.activityDate}} </text>
+          <text class='gray font-small ml-20'>({{item.activityStartTime}} - {{item.activityEndTime}})</text>
         </view>
         <view class='right-arrow'>
 
@@ -45,74 +46,22 @@
 
       </view>
       <view class='activity-address-box'>
-        <text class='font-midium gray'>活动地点：611体育活动中心</text>
+        <text class='font-midium gray'>{{item.activitySite}}</text>
       </view>
       <view class='activity-count-box'>
 
-        <text class='font-midium gray'>{{totalSignedList.monday.length > 0 ? totalSignedList.monday[0].totalCount : 0 }}/37人</text>
-        <text class='font-small gray ml-20 orange'> {{isSignupEnd[0] ? '报名结束':'正在报名'}}</text>
+        <text class='font-midium gray'>{{totalSignedList[itemName.enName][item.activityDateEn].length > 0 ? totalSignedList[itemName.enName][item.activityDateEn][0].totalCount : 0 }}/{{item.activityPeopleLimit}}人</text>
+        <text class='font-small gray ml-20 orange'> {{isSignupEnd[item.activityid - 1] ? '报名结束':'正在报名'}} </text>
       </view>
       <view class='sign-list-item-thumbnail'>
         <image class="sign-avatar" src="./user-unlogin.png" background-size="cover"></image>
-        <image wx:key="unique" wx:for="{{totalSignedList.monday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
+        <image wx:key="unique" wx:for="{{totalSignedList[itemName.enName][item.activityDateEn]}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
       </view>
     </view>
-    <!--周三活动  -->
-    <view class='activity-box' bindtap="bindGoToSignupList" data-activityid="3" data-title='羽毛球' data-is-signup-end="{{isSignupEnd[2]}}" hover-class="navigator-hover">
-
-      <view class='activity-date-box'>
-        <view class='activity-date-box-left'>
-          <text class='activity-date'> 周三 </text>
-          <text class='gray font-small ml-20'>(12：00 - 13：30)</text>
-        </view>
-        <view class='right-arrow'>
-
-        </view>
-
-      </view>
-      <view class='activity-address-box'>
-        <text class='font-midium gray'>活动地点：611体育活动中心</text>
-      </view>
-      <view class='activity-count-box'>
-
-        <text class='font-midium gray'>{{totalSignedList.wednesday.length > 0 ? totalSignedList.wednesday[0].totalCount : 0 }}/37人</text>
-        <text class='font-small gray ml-20 orange'> {{isSignupEnd[2] ? '报名结束':'正在报名'}}</text>
-      </view>
-      <view class='sign-list-item-thumbnail'>
-        <image class="sign-avatar" src="./user-unlogin.png" background-size="cover"></image>
-        <image wx:key="unique" wx:for="{{totalSignedList.wednesday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
-      </view>
-    </view>
-    <!--周四活动  -->
-    <view class='activity-box' bindtap="bindGoToSignupList" data-activityid="4" data-title='羽毛球' data-is-signup-end="{{isSignupEnd[3]}}" hover-class="navigator-hover">
-
-      <view class='activity-date-box'>
-        <view class='activity-date-box-left'>
-          <text class='activity-date'> 周四 </text>
-          <text class='gray font-small ml-20'>(12：00 - 13：30)</text>
-        </view>
-        <view class='right-arrow'>
-
-        </view>
-
-      </view>
-      <view class='activity-address-box'>
-        <text class='font-midium gray'>活动地点：611体育活动中心</text>
-      </view>
-      <view class='activity-count-box'>
-
-        <text class='font-midium gray'>{{totalSignedList.thursday.length > 0 ? totalSignedList.thursday[0].totalCount : 0 }}/37人</text>
-        <text class='font-small gray ml-20 orange'> {{isSignupEnd[3] ? '报名结束':'正在报名'}}</text>
-      </view>
-      <view class='sign-list-item-thumbnail'>
-        <image class="sign-avatar" src="./user-unlogin.png" background-size="cover"></image>
-        <image wx:key="unique" wx:for="{{totalSignedList.thursday}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
-      </view>
-    </view>
+    <!-- ----------------- 循环代码片段 end ----------- -->
   </view>
-  <view class="activity-container" hidden="{{!(1 == actived)}}">
-    <text style='text-align:center' class='font-midium gray'>正在组织中</text>
-  </view>
+
+  
 
   <text style='font-size:20rpx;color:#bfbfbf'>代码贡献者 : zhouyunlong</text>
 </view>

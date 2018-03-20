@@ -16,17 +16,8 @@ App({
   },
 
   testDate: function(){
-    console.log("--------------------------------")
-      let currentDate = moment().format('L')
-      var weekOfday = moment().format('E');//计算今天是这周第几天  
-      var last_monday = moment().subtract(weekOfday + 7 - 1, 'days').format('YYYY/MM/DD');//周一日期  
-      var last_sunday = moment().subtract(weekOfday, 'days').format('YYYY/MM/DD');
-      console.log(moment().day("6").format("L"))
-      console.log(weekOfday)
-      console.log(last_monday)
-      console.log(last_sunday)
-      console.log("--------------------------------")
-  },
+   
+  }, 
 
   getUserInfo: function (cb) {
     var that = this;
