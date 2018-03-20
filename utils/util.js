@@ -51,10 +51,13 @@ const changeDepartmentNameByCode = (code) => {
   switch (code) {
     case 0: return department = "CRM";
     case 1: return department = "托管";
-    case 2: return department = "员工渠道";
+    case 2: return department = "网点渠道";
     case 3: return department = "CSR";
     case 4: return department = "产品";
-    case 5: return department = "技术支持部";
+    case 5: return department = "技术管理处";
+    case 6: return department = "测试与推广支持处";
+    case 7: return department = "综合部";
+    case 8: return department = "中心领导";
     default: return department
   }
 }

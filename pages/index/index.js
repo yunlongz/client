@@ -22,7 +22,7 @@ Page({
     openId: null,
     hasRealName: false,
     hiddenmodalput: true,
-    array: ['CRM', '托管', '员工渠道', 'CSR', '产品'],
+    array: config.departments,
     realName: '',
     department: 0,
     lastLoggedTime: moment(wx.getStorageSync('logs')[0]).format("LLL"),

@@ -41,10 +41,12 @@ var config = {
     getServerDateUrl: `${host}/weapp/getServerDate`
   },
   constants: {
-    showLimitNum: 10
+    showLimitNum: 10     //首页显示的头像图标个数
 
 
   },
+
+  departments: ['CRM', '托管', '网点渠道', 'CSR', '产品', '技术管理处', '测试与推广支持处', '综合部','中心领导'],
   categories: [
     { name: "羽毛球", id: 0, enName: 'badminton' },
     { name: "气排球", id: 1, enName: 'gasVolleyball' },
