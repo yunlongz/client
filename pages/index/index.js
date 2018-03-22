@@ -83,9 +83,14 @@ Page({
       console.log(list)
       return list
 
-    })(config.activityTemplateData)
+    })(config.activityTemplateData),
+    hiddenNotice:false
   },
-
+  tabClose:function(e){
+    this.setData({
+      hiddenNotice: !this.data.hiddenNotice
+    })
+  },
   tabClick: function (e) {
     console.log(e)
     this.setData({

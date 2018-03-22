@@ -4,7 +4,9 @@
     "pages/index/index",
     "pages/addCgi/addCgi",
     "pages/signup/signup",
-    "pages/notice/show"
+    "pages/notice/show",
+    "pages/map/map",
+    "pages/personSignupList/list"
   ],
   "window":{
     "backgroundColor":"#F6F6F6",
