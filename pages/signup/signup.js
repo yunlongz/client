@@ -25,7 +25,8 @@ Page({
     loading:true,
     loadingData:true,
     activityname:'',
-    isSignupEnd:false
+    isSignupEnd:false,
+    disabled:false
     
   },
 
@@ -113,16 +114,50 @@ Page({
       }
     })
   },
+  cancelSignup:function(e){
+    console.log("取消报名")
+    wx.request({
+      url: config.service.cancelSignupUrl,
+      data:{
+        signDate: this.data.currentDate,
+        activityName: this.data.activityname,
+        activityid: this.data.activityid,
+        wxopenid:this.data.openId
+      },
+      method:"POST",
+      success:(res)=>{
+        console.log(res)
+        if(res.data.result >=1){
+          this.setData({
+            isSigned: false,
+            disabled: !this.data.disabled
+          })
+        }
+       
+        this.getActivity()
+      }
+    })
+  },
   signupActivity: function () {
     var that = this
     console.log('点击报名')
-    if (this.data.hasRealName) {
-      this.signup()
+    this.setData({
+      disabled:!this.data.disabled
+    })
+
+    if(this.data.isSigned){
+      this.cancelSignup()
     }
-    else {
-      this.setData({
-        hiddenmodalput: !this.data.hiddenmodalput
-      })
+    else{
+      if (this.data.hasRealName) {
+        this.signup()
+
+      }
+      else {
+        this.setData({
+          hiddenmodalput: !this.data.hiddenmodalput
+        })
+      }
     }
   },
   cancel: function () {
@@ -203,7 +238,8 @@ Page({
         util.showSuccess('报名成功')
         // that.data.isSigned = true
         that.setData({
-          isSigned:true
+          isSigned:true,
+          disabled: !that.data.disabled
         })
         that.getActivity()
       },
@@ -260,7 +296,7 @@ Page({
   },
 
   
-  isSigned:function(cb){
+  isSignedFn:function(cb){
     var that = this
     wx.request({
       url: config.service.isSignedUrl,
@@ -300,11 +336,10 @@ Page({
     
    
     if(!this.data.isSigned){
-      this.isSigned(function(){
+      this.isSignedFn(function(){
         that.setData({
           loading: false
         })
-        
       })
       
     }

@@ -1,8 +1,10 @@
 <!--index.wxml-->
 <view class="container">
-<!--通知消息  -->
- <view wx:if="{{noticeList}}" class="notice" hidden='{{hiddenNotice}}'>
-    <view class="notice_iteml"><image src='../../images/notify.png' class='notice_icon' background-size="cover"></image></view>
+  <!--通知消息  -->
+  <view wx:if="{{noticeList}}" class="notice" hidden='{{hiddenNotice}}'>
+    <view class="notice_iteml">
+      <image src='../../images/notify.png' class='notice_icon' background-size="cover"></image>
+    </view>
     <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
       <navigator wx:for-items="{{noticeList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
         <swiper-item>
@@ -10,33 +12,43 @@
         </swiper-item>
       </navigator>
     </swiper>
-    <view class="notice_item_right "  bindtap='tabClose'><image src='../../images/close.png' class='notice_icon' background-size="cover"></image></view>
+    <view class="notice_item_right " bindtap='tabClose'>
+      <image src='../../images/close.png' class='notice_icon' background-size="cover"></image>
+    </view>
   </view>
   <!-- 用户登录测试 -->
   <view class="userinfo">
     <view class='userinfo-left'>
-      <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+      <view>
+        <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+      </view>
       <text class="userinfo-nickname">{{logged ? userInfo.nickName : ''}}{{hasRealName?' ('+realName+')' : ''}}</text>
     </view>
-    <text class="userinfo-lastDate" wx:if="{{logged}}">{{lastLoggedTime}}</text>
+    <!-- <text class="userinfo-lastDate" wx:if="{{logged}}">{{lastLoggedTime}}</text> -->
+    <navigator class="userinfo-signlistbox" url="/pages/personSignupList/list?id={{openId}}" open-type="navigate">
+      <text class='gray font-small'>已报活动</text>
+      <view class='right-arrow ml-20'>
+      </view>
+    </navigator>
   </view>
   <view class="type-container">
     <scroll-view class="type-navbar" scroll-x="true">
-      <view class="type-box" wx:for-items="{{categories}}" wx:key="id" bindtap="tabClick" id="{{item.id}}" data-name="{{item.name}}" data-enName="{{item.enName}}" >
+      <view class="type-box" wx:for-items="{{categories}}" wx:key="id" bindtap="tabClick" id="{{item.id}}" data-name="{{item.name}}" data-enName="{{item.enName}}">
         <view>
-          <image src="../../images/{{item.enName}}.png"  background-size="cover" class='title-icon'></image>
+          <image src="../../images/{{item.enName}}.png" background-size="cover" class='title-icon'></image>
         </view>
-        <view class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" >
+        <view class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}">
           {{item.name}}
         </view>
       </view>
     </scroll-view>
   </view>
- 
 
-  <view wx:key="unique"  wx:for-item="itemName" class="activity-container" hidden="{{!(itemName.id == actived)}}" wx:for="{{categories}}">
-      <!-- ----------------- 循环代码片段 start ----------- -->
-    <view wx:key="unique"  wx:for-item="item" wx:for="{{activityTemplateData[itemName.enName]}}" class='activity-box' bindtap="bindGoToSignupList" data-activityid="{{item.activityid}}" data-title="{{item.title}}" data-is-signup-end="{{isSignupEnd[item.activityid - 1]}}" hover-class="navigator-hover">
+
+  <view wx:key="unique" wx:for-item="itemName" class="activity-container" hidden="{{!(itemName.id == actived)}}" wx:for="{{categories}}">
+    <!-- ----------------- 循环代码片段 start ----------- -->
+    <view wx:key="unique" wx:for-item="item" wx:for="{{activityTemplateData[itemName.enName]}}" class='activity-box' bindtap="bindGoToSignupList" data-activityid="{{item.activityid}}" data-title="{{item.title}}" data-is-signup-end="{{isSignupEnd[item.activityid - 1]}}"
+      hover-class="navigator-hover">
 
       <view class='activity-date-box'>
         <view class='activity-date-box-left'>
@@ -64,7 +76,7 @@
     <!-- ----------------- 循环代码片段 end ----------- -->
   </view>
 
-  
+
 
   <text style='font-size:20rpx;color:#bfbfbf'>代码贡献者 : zhouyunlong</text>
 </view>

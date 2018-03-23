@@ -8,7 +8,7 @@
       <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
     </view>
     <view wx:if="{{!loading && !isSignupEnd}}" class='sign-button-box'>
-      <button class='sign-button' bindtap='signupActivity' disabled="{{isSigned}}" type="primary">{{isSigned ? "已报名" : "我要报名"}}</button>
+      <button class='sign-button' bindtap='signupActivity' disabled="{{disabled}}" type="primary">{{isSigned ? "取消报名" : "我要报名"}}</button>
     </view>
     <view wx:else class='sign-button-box'>
         <text class='gray'>报名结束</text>
