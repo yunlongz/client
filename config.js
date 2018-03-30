@@ -41,6 +41,9 @@ var config = {
     getServerDateUrl: `${host}/weapp/getServerDate`,
 
     cancelSignupUrl: `${host}/weapp/cancelSignup`,
+
+    getOwnListUrl: `${host}/weapp/getOwnList`,
+
   },
   constants: {
     showLimitNum: 10     //首页显示的头像图标个数

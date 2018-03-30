@@ -1,2 +1,21 @@
-<!--pages/personSignupList/list.wxml-->
-<text>pages/personSignupList/list.wxml</text>
+<view class='sign-list'>
+
+    <view wx:key="unique" wx:for="{{signList}}" class='sign-list-item'>
+      <view>
+        <text class='list-index'>{{index+1}}</text>
+      </view>
+      <view>
+        <image class="userinfo-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
+      </view>
+      <view>
+        <text>{{item.realname}}</text>
+      </view>
+      <view style='margin-left:10rpx'>
+        <text class='font-small gray'>({{item.department}})</text>
+      </view>
+      <view>
+        <text>{{item.activityname}}</text>
+      </view>
+    </view>
+
+  </view>
