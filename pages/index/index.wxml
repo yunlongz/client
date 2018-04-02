@@ -18,7 +18,7 @@
   </view>
   <!-- 用户登录测试 -->
   <view class="userinfo">
-    <view class='userinfo-left'>
+    <view class='userinfo-left' bindtap="userinfoModal">
       <view>
         <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
       </view>
@@ -75,7 +75,16 @@
     </view>
     <!-- ----------------- 循环代码片段 end ----------- -->
   </view>
-
+  <modal hidden="{{hiddenmodalput}}" title="" confirm-text="提交" cancel-text="取消" bindcancel="nameCancel" bindconfirm="nameConfirm">
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{department}}" range="{{array}}">
+        <view class="picker">
+          当前选择：{{array[department]}}
+        </view>
+      </picker>
+    </view>
+    <input class='input-name' maxlength="10" type="text" bindblur='bindBlur' bindinput="bindKeyInput" type='text' value="{{realName}}" placeholder="请务必填写真实姓名（必填）" />
+  </modal>
 
 
   <text style='font-size:20rpx;color:#bfbfbf'>代码贡献者 : zhouyunlong</text>

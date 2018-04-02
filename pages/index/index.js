@@ -240,6 +240,108 @@ Page({
     //   }
     // })
   },
+
+  /**
+   *  点击头像显示姓名输入框
+   */
+  userinfoModal: function() {
+    this.setData({
+      hiddenmodalput: false
+    })
+  },
+
+  nameCancel: function() {
+    this.setData({
+      hiddenmodalput: true
+    })
+  },
+
+  nameConfirm: function() {
+    var that = this
+    //已实名制，修改交易
+    if (this.data.hasRealName) {
+      wx.request({
+        url: config.service.updateUserInfoUrl,
+        data: {
+          wxopenid: this.data.openId,
+          realname: this.data.realName,
+          department: this.data.department
+        },
+        method: 'post',
+        header: {//请求头
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        success: (result)=>{
+          console.log("update姓名")
+          console.log(result)
+          app.globalData.realname = that.data.realName
+          app.globalData.department = that.data.department
+          that.setData({
+            hiddenmodalput: true
+          })
+        },
+        fail: (error)=>{
+          util.showModel('修改失败', error)
+        }
+      })
+    } else {//未实名制，新增交易
+      var that = this
+      let requestData = {
+        wxopenid: this.data.openId,
+        nickName: this.data.userInfo.nickName,
+        gender: this.data.userInfo.gender,
+        avatarUrl: this.data.userInfo.avatarUrl,
+        realname: this.data.realName,
+        department: this.data.department
+      };
+      console.log('add user', requestData)
+      wx.request({
+        url: config.service.insertUserInfoUrl,
+        // login: true,
+        data: requestData,
+        header: {//请求头
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        success(result) {
+          util.showSuccess('报名成功', "您已成功添加姓名")
+          that.setData({
+            hiddenmodalput: true,
+          })
+          // that.data.isSigned = true
+          // that.getActivity()
+        },
+        fail(error) {
+          util.showModel('修改失败', error)
+          console.log('修改失败', error)
+        }
+      })
+    }
+  },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      department: e.detail.value
+    })
+  },
+  bindBlur: function (e) {
+    console.log(e.detail.value)
+    if (e.detail.value == '') {
+      return
+    }
+    else {
+      this.setData({
+        realName: e.detail.value
+      })
+    }
+  },
+  bindKeyInput: function (e) {
+    // console.log('当前内容', e.detail.value)
+    // this.setData({
+    //   realName: e.detail.value
+    // })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -284,9 +386,11 @@ Page({
           else {
             console.log(res)
             app.globalData.realname = res.data.result[0].realname
+            app.globalData.department = res.data.result[0].department
             that.setData({
               hasRealName: true,
-              realName: res.data.result[0].realname
+              realName: res.data.result[0].realname,
+              department: res.data.result[0].department
             })
           }
         },
@@ -310,6 +414,12 @@ Page({
   onShow: function () {
     console.log('*****************************************************************', config)
     var that = this
+    if (app.globalData.realname) {
+      that.setData({
+        hasRealName: true,
+        realName: app.globalData.realname
+      })
+    }
     wx.request({
       url: config.service.getServerDateUrl,
       success: function (res) {

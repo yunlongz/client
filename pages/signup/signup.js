@@ -184,6 +184,8 @@ Page({
           hasRealName: true,
           isSigned: true
         })
+        app.globalData.realname = that.data.realName
+        app.globalData.department = that.data.department
         that.signup()
       }
      
