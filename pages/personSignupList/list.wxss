@@ -1,1 +1,39 @@
-/* pages/personSignupList/list.wxss */
+.gray{
+  color: gray
+} 
+.font-small{
+  font-size: 24rpx
+}
+
+.list-index{
+  color:orchid;
+  font-size: 36rpx;
+  font-weight: bold
+}
+.sign-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* width:92%; */
+  padding-left: 60rpx;
+  padding-right:60rpx
+}
+.sign-list-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(234, 232, 235);
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+  border-radius: 10rpx
+
+}
+
+
+.userinfo-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}

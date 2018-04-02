@@ -1,3 +1,6 @@
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util.js')
 // pages/personSignupList/list.js
 Page({
 
@@ -5,14 +8,53 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    signList: [],
+    totalPage:1,
+    loadingData: false,
+    currentPage:0
   },
+  //获取活动列表
+  getActivity: function (id) {
+    var that = this
+    if(id != undefined){
+      wx.request({
+        url: config.service.getOwnListUrl,
+        // login: true,
+        data: {
+          wxopenid:id,
+          currentPage:this.data.currentPage
+        },
+        success: (result)=>{
+          console.log("获取报名列表成功----->own  ", result)
 
+          this.setData({
+            signList: ((data) => {
+              for (let i = 0; i < data.length; i++) {
+                data[i].department = util.changeDepartmentNameByCode(data[i].department)
+              }
+              return data
+            })(result.data.list),
+            totalPage: result.data.totalPage,
+            loadingData: false
+          })
+        },
+        fail:(res)=>{
+          console.log(res)
+        }
+      })
+    }else{
+      util.showModel('查询失败', '')
+    }
+   
+    console.log('进入加载活动列表')
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
+    this.getActivity(options.id)
   },
 
   /**
