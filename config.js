@@ -31,6 +31,7 @@ var config = {
     insertUserInfoUrl: `${host}/weapp/insertUserInfo`,
 
     updateUserInfoUrl: `${host}/weapp/updateUserInfo`,
+    
 
     getOpenIdUrl: `${host}/weapp/getOpenId`,
 
