@@ -29,7 +29,12 @@
   border-radius: 10rpx
 
 }
-
+.sign-list-none{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 .userinfo-avatar {
     width: 100rpx;

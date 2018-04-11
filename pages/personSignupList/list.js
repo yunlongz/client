@@ -33,9 +33,10 @@ Page({
                 data[i].department = util.changeDepartmentNameByCode(data[i].department)
               }
               return data
-            })(result.data.list),
-            totalPage: result.data.totalPage,
-            loadingData: false
+            })(result.data.list || []),
+            totalPage: result.data.totalPage || 0,
+            loadingData: false,
+            resultText:result.data.list ? "" : "尚未报名活动"
           })
         },
         fail:(res)=>{

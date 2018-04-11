@@ -1,5 +1,5 @@
 <view class='sign-list'>
-
+  
     <view wx:key="unique" wx:for="{{signList}}" class='sign-list-item'>
       <view>
         <text class='list-index'>{{index+1}}</text>
@@ -17,5 +17,7 @@
         <text>{{item.activityname}}</text>
       </view>
     </view>
-
+    <view class='sign-list-none'>
+      <text>{{resultText}}</text>
+    </view>
   </view>
