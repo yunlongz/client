@@ -26,9 +26,9 @@
     </view>
     <!-- <text class="userinfo-lastDate" wx:if="{{logged}}">{{lastLoggedTime}}</text> -->
     <navigator class="userinfo-signlistbox" url="/pages/personSignupList/list?id={{openId}}" open-type="navigate">
-      <text class='gray font-small'>已报活动</text>
+      <!-- <text class='gray font-small'>已报活动</text>
       <view class='right-arrow ml-20'>
-      </view>
+      </view> -->
     </navigator>
   </view>
   <view class="type-container">
@@ -69,7 +69,7 @@
         <text class='font-small gray ml-20 orange'> {{isSignupEnd[item.activityid - 1] ? '报名结束':'正在报名'}} </text>
       </view>
       <view class='sign-list-item-thumbnail'>
-        <image class="sign-avatar" src="./user-unlogin.png" background-size="cover"></image>
+        <image class="sign-avatar" src="../../images/usergroup.png" background-size="cover"></image>
         <image wx:key="unique" wx:for="{{totalSignedList[itemName.enName][item.activityDateEn]}}" class="sign-avatar" src="{{item.avatar_url}}" background-size="cover"></image>
       </view>
     </view>

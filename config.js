@@ -3,9 +3,9 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-// var host = 'https://7bgpkgeo.qcloud.la';
+var host = 'https://7bgpkgeo.qcloud.la';
 //生产环境request域名
-var host = 'https://953500312.cksign.club'
+// var host = 'https://953500312.cksign.club'
 var config = {
 
   // 下面的地址配合云端 Demo 工作
@@ -46,6 +46,10 @@ var config = {
     cancelSignupUrl: `${host}/weapp/cancelSignup`,
 
     getOwnListUrl: `${host}/weapp/getOwnList`,
+
+    getToken:`${host}/weapp/getToken`,
+    
+    sendMailToManager: `${host}/weapp/sendMailToManager`,
 
   },
   constants: {

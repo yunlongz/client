@@ -6,7 +6,8 @@
     "pages/signup/signup",
     "pages/notice/show",
     "pages/map/map",
-    "pages/personSignupList/list"
+    "pages/personSignupList/list",
+    "pages/qrcode/qrsign"    
   ],
   "window":{
     "backgroundColor":"#F6F6F6",
