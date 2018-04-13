@@ -25,10 +25,10 @@
       <text class="userinfo-nickname">{{logged ? userInfo.nickName : ''}}{{hasRealName?' ('+realName+')' : ''}}</text>
     </view>
     <!-- <text class="userinfo-lastDate" wx:if="{{logged}}">{{lastLoggedTime}}</text> -->
-    <navigator class="userinfo-signlistbox" url="/pages/personSignupList/list?id={{openId}}" open-type="navigate">
-      <!-- <text class='gray font-small'>已报活动</text>
+    <navigator class="userinfo-signlistbox" url="/pages/admin/index?id={{openId}}" open-type="navigate">
+       <text class='gray font-small'>修改活动信息</text>
       <view class='right-arrow ml-20'>
-      </view> -->
+      </view> 
     </navigator>
   </view>
   <view class="type-container">
