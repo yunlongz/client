@@ -47,6 +47,8 @@ var config = {
 
     getOwnListUrl: `${host}/weapp/getOwnList`,
 
+    getActivityListUrl: `${host}/weapp/getActivityList`,
+
     getToken:`${host}/weapp/getToken`,
     
     sendMailToManager: `${host}/weapp/sendMailToManager`,
@@ -70,102 +72,102 @@ var config = {
     // { name: "足球", id: 5 },
     // { name: "台球", id: 6 },
   ],
-  activityTemplateData: {
-    badminton: [{
-      id: 1,
-      name: 'badminton',
-      title: '羽毛球',
-      activityid: 1,    //1..7 分别代表星期一到星期天
-      activityStartTime: '12:00',
-      activityEndTime: '13:30',
-      activitySite: '611体育活动中心',
-      activityPeopleLimit: 40,
-    }, {
-      id: 2,
-      title: '羽毛球',
-      activityid: 3,    //1..7 分别代表星期一到星期天
-      activityStartTime: '12:00',
-      activityEndTime: '13:30',
-      activitySite: '611体育活动中心',
-      activityPeopleLimit: 40,
-    }, {
-      id: 3,
-      title: '羽毛球',
-      activityid: 4,    //1..7 分别代表星期一到星期天
-      activityDate: '周四',
-      activityStartTime: '12:00',
-      activityEndTime: '13:30',
-      activitySite: '611体育活动中心',
-      activityPeopleLimit: 40,
-    }],
-    //气排球
-    gasVolleyball: [{
-      id: 1,
-      title: '气排球',
-      activityid: 2,    //1..7 分别代表星期一到星期天
-      activityDate: '周二',
-      activityStartTime: '12:00',
-      activityEndTime: '13:30',
-      activitySite: '611体育活动中心',
-      activityPeopleLimit: 40
-    }, {
-      id: 2,
-      title: '气排球',
-      activityid: 5,    //1..7 分别代表星期一到星期天
-      activityDate: '周五',
-      activityStartTime: '12:00',
-      activityEndTime: '13:30',
-      activitySite: '611体育活动中心',
-      activityPeopleLimit: 40
-    }],
-    //篮球
-    basketball:[
-      {
-        id: 1,
-        title: '篮球',
-        activityid: 3,    //1..7 分别代表星期一到星期天
-        activityDate: '周三',
-        activityStartTime: '18:20',
-        activityEndTime: '22:00',
-        activitySite: '四川大学华西校区篮球场',
-        activityPeopleLimit: 60
-      }
-    ],
-    yoga: [
-      {
-        id: 1,
-        title: '瑜伽',
-        activityid: 1,    //1..7 分别代表星期一到星期天
-        activityDate: '周一',
-        activityStartTime: '12:00',
-        activityEndTime: '13:00',
-        activitySite: '航天四十楼活动室',
-        activityPeopleLimit: 30
-      },
-      {
-        id: 2,
-        title: '瑜伽',
-        activityid: 4,    //1..7 分别代表星期一到星期天
-        activityDate: '周四',
-        activityStartTime: '12:15',
-        activityEndTime: '13:15',
-        activitySite: '航天四十楼活动室',
-        activityPeopleLimit: 30
-      }
-    ],
-    dance: [
-      {
-        id: 1,
-        title: '舞蹈',
-        activityid: 4,    //1..7 分别代表星期一到星期天
-        activityDate: '周三',
-        activityStartTime: '12:15',
-        activityEndTime: '13:15',
-        activitySite: '航天四十楼活动室',
-        activityPeopleLimit: 30
-      }
-    ]
-  }
+  // activityTemplateData: {
+  //   badminton: [{
+  //     id: 1,
+  //     name: 'badminton',
+  //     title: '羽毛球',
+  //     activityid: 1,    //1..7 分别代表星期一到星期天
+  //     activityStartTime: '12:00',
+  //     activityEndTime: '13:30',
+  //     activitySite: '611体育活动中心',
+  //     activityPeopleLimit: 40,
+  //   }, {
+  //     id: 2,
+  //     title: '羽毛球',
+  //     activityid: 3,    //1..7 分别代表星期一到星期天
+  //     activityStartTime: '12:00',
+  //     activityEndTime: '13:30',
+  //     activitySite: '611体育活动中心',
+  //     activityPeopleLimit: 40,
+  //   }, {
+  //     id: 3,
+  //     title: '羽毛球',
+  //     activityid: 4,    //1..7 分别代表星期一到星期天
+  //     activityDate: '周四',
+  //     activityStartTime: '12:00',
+  //     activityEndTime: '13:30',
+  //     activitySite: '611体育活动中心',
+  //     activityPeopleLimit: 40,
+  //   }],
+  //   //气排球
+  //   gasVolleyball: [{
+  //     id: 1,
+  //     title: '气排球',
+  //     activityid: 2,    //1..7 分别代表星期一到星期天
+  //     activityDate: '周二',
+  //     activityStartTime: '12:00',
+  //     activityEndTime: '13:30',
+  //     activitySite: '611体育活动中心',
+  //     activityPeopleLimit: 40
+  //   }, {
+  //     id: 2,
+  //     title: '气排球',
+  //     activityid: 5,    //1..7 分别代表星期一到星期天
+  //     activityDate: '周五',
+  //     activityStartTime: '12:00',
+  //     activityEndTime: '13:30',
+  //     activitySite: '611体育活动中心',
+  //     activityPeopleLimit: 40
+  //   }],
+  //   //篮球
+  //   basketball:[
+  //     {
+  //       id: 1,
+  //       title: '篮球',
+  //       activityid: 3,    //1..7 分别代表星期一到星期天
+  //       activityDate: '周三',
+  //       activityStartTime: '18:20',
+  //       activityEndTime: '22:00',
+  //       activitySite: '四川大学华西校区篮球场',
+  //       activityPeopleLimit: 60
+  //     }
+  //   ],
+  //   yoga: [
+  //     {
+  //       id: 1,
+  //       title: '瑜伽',
+  //       activityid: 1,    //1..7 分别代表星期一到星期天
+  //       activityDate: '周一',
+  //       activityStartTime: '12:00',
+  //       activityEndTime: '13:00',
+  //       activitySite: '航天四十楼活动室',
+  //       activityPeopleLimit: 30
+  //     },
+  //     {
+  //       id: 2,
+  //       title: '瑜伽',
+  //       activityid: 4,    //1..7 分别代表星期一到星期天
+  //       activityDate: '周四',
+  //       activityStartTime: '12:15',
+  //       activityEndTime: '13:15',
+  //       activitySite: '航天四十楼活动室',
+  //       activityPeopleLimit: 30
+  //     }
+  //   ],
+  //   dance: [
+  //     {
+  //       id: 1,
+  //       title: '舞蹈',
+  //       activityid: 4,    //1..7 分别代表星期一到星期天
+  //       activityDate: '周三',
+  //       activityStartTime: '12:15',
+  //       activityEndTime: '13:15',
+  //       activitySite: '航天四十楼活动室',
+  //       activityPeopleLimit: 30
+  //     }
+  //   ]
+  // }
 
 
 };

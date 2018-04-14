@@ -29,61 +29,13 @@ Page({
     totalCount: 0,
     activityName: '羽毛球',
     enName:'badminton',
-    totalSignedList: ((list) => {
-      let newSignedList = {}
-      let keylist = Object.keys(list)
-      for (var i = 0; i < keylist.length; i++) {
-        newSignedList[keylist[i]] = {}
-      }
-      return newSignedList
-    })(config.activityTemplateData),
+    totalSignedList: {},
     categories: config.categories,
     activeCategoryId: 0,
     actived: 0,
     isSignupEnd: [false, false, false, false, false, false, false],
     serverDate: moment(),
-    activityTemplateData: ((list) => {
-      let newList = []
-      // console.log("&&&&&",Object.keys(list))
-      let keylist = Object.keys(list)
-      for (var i = 0; i < keylist.length; i++) {
-        for (let j = 0; j < list[keylist[i]].length; j++) {
-          if (list[keylist[i]][j]['activityid'] == 1) {
-            list[keylist[i]][j]['activityDate'] = '周一';
-            list[keylist[i]][j]['activityDateEn'] = 'monday';
-
-          }
-          if (list[keylist[i]][j]['activityid'] == 2) {
-            list[keylist[i]][j]['activityDate'] = '周二';
-            list[keylist[i]][j]['activityDateEn'] = 'tuesday';
-          }
-          if (list[keylist[i]][j]['activityid'] == 3) {
-            list[keylist[i]][j]['activityDate'] = '周三';
-            list[keylist[i]][j]['activityDateEn'] = 'wednesday';
-          }
-          if (list[keylist[i]][j]['activityid'] == 4) {
-            list[keylist[i]][j]['activityDate'] = '周四';
-            list[keylist[i]][j]['activityDateEn'] = 'thursday';
-          }
-          if (list[keylist[i]][j]['activityid'] == 5) {
-            list[keylist[i]][j]['activityDate'] = '周五';
-            list[keylist[i]][j]['activityDateEn'] = 'friday';
-          }
-          if (list[keylist[i]][j]['activityid'] == 6) {
-            list[keylist[i]][j]['activityDate'] = '周六';
-            list[keylist[i]][j]['activityDateEn'] = 'saturday';
-          }
-          if (list[keylist[i]][j]['activityid'] == 7) {
-            list[keylist[i]][j]['activityDate'] = '周天';
-            list[keylist[i]][j]['activityDateEn'] = 'sunday';
-          }
-          list[keylist[i]][j]['name'] = keylist[i]
-        }
-      }
-      console.log(list)
-      return list
-
-    })(config.activityTemplateData),
+    activityTemplateData: {},
     hiddenNotice:false
   },
   tabClose:function(e){
@@ -217,6 +169,78 @@ Page({
     }
 
     return newListObject
+  },
+
+  getActivityList: function(callback) {
+    var that = this;
+    wx.request({
+      url: config.service.getActivityListUrl,
+      data: {},
+      header: {//请求头
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "GET",
+      success(result) {
+        console.log("activity list:", result);
+        that.setData({
+          totalSignedList: ((list) => {
+            let newSignedList = {}
+            let keylist = Object.keys(list)
+            for (var i = 0; i < keylist.length; i++) {
+              newSignedList[keylist[i]] = {}
+            }
+            return newSignedList
+          })(result.data),
+          activityTemplateData: ((list) => {
+            let newList = []
+            // console.log("&&&&&",Object.keys(list))
+            let keylist = Object.keys(list)
+            for (var i = 0; i < keylist.length; i++) {
+              for (let j = 0; j < list[keylist[i]].length; j++) {
+                if (list[keylist[i]][j]['activityid'] == 1) {
+                  list[keylist[i]][j]['activityDate'] = '周一';
+                  list[keylist[i]][j]['activityDateEn'] = 'monday';
+
+                }
+                if (list[keylist[i]][j]['activityid'] == 2) {
+                  list[keylist[i]][j]['activityDate'] = '周二';
+                  list[keylist[i]][j]['activityDateEn'] = 'tuesday';
+                }
+                if (list[keylist[i]][j]['activityid'] == 3) {
+                  list[keylist[i]][j]['activityDate'] = '周三';
+                  list[keylist[i]][j]['activityDateEn'] = 'wednesday';
+                }
+                if (list[keylist[i]][j]['activityid'] == 4) {
+                  list[keylist[i]][j]['activityDate'] = '周四';
+                  list[keylist[i]][j]['activityDateEn'] = 'thursday';
+                }
+                if (list[keylist[i]][j]['activityid'] == 5) {
+                  list[keylist[i]][j]['activityDate'] = '周五';
+                  list[keylist[i]][j]['activityDateEn'] = 'friday';
+                }
+                if (list[keylist[i]][j]['activityid'] == 6) {
+                  list[keylist[i]][j]['activityDate'] = '周六';
+                  list[keylist[i]][j]['activityDateEn'] = 'saturday';
+                }
+                if (list[keylist[i]][j]['activityid'] == 7) {
+                  list[keylist[i]][j]['activityDate'] = '周天';
+                  list[keylist[i]][j]['activityDateEn'] = 'sunday';
+                }
+                list[keylist[i]][j]['name'] = keylist[i]
+              }
+            }
+            return list
+          })(result.data),
+        });
+        if (callback) {
+          callback();
+        }
+      },
+      fail(error) {
+        util.showModel('查询活动列表失败', error)
+        console.log('查询活动列表失败', error)
+      },
+    })
   },
 
   getNotice: function () {
@@ -357,6 +381,7 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     this.getNotice()
+    this.getActivityList(this.getActivity())
 
     var that = this
     //调用应用实例的方法获取全局数据
@@ -379,7 +404,7 @@ Page({
         },
         success: function (res) {
           console.log("*****>>>", res)
-          that.getActivity()
+          //that.getActivity()
           if (res.data.result.length == 0) {
             // util.showSuccess('实名制')
           }
