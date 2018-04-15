@@ -16,7 +16,7 @@
   background: white;
   justify-content: space-between;
   height: 80rpx;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   width: 100%;
   align-items: center;
   display: flex;
@@ -28,7 +28,7 @@
 .section-row{
   background: white;
   height: 80rpx;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@
 .section-address{
    background: white;
   height: 80rpx;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -74,4 +74,7 @@
 }
 .label-1__text{
   margin-right: 30rpx
+}
+.activity-box{
+  margin-bottom: 50rpx
 }

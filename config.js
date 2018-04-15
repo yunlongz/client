@@ -49,6 +49,8 @@ var config = {
 
     getActivityListUrl: `${host}/weapp/getActivityList`,
 
+    updateActivityById: `${host}/weapp/updateActivity`,
+
     getToken:`${host}/weapp/getToken`,
     
     sendMailToManager: `${host}/weapp/sendMailToManager`,

@@ -44,7 +44,7 @@ Page({
     })
   },
   tabClick: function (e) {
-    console.log(e)
+    console.log(e)  
     this.setData({
       activeCategoryId: e.currentTarget.id,
       actived: e.currentTarget.id,
@@ -478,10 +478,11 @@ Page({
    */
   onPullDownRefresh: function () {
     console.log("下拉动作")
-    this.getActivity(function () {
+    this.getActivityList(this.getActivity(function () {
       console.log("stop()")
       wx.stopPullDownRefresh()
-    })
+    }))
+    // this.getActivity()
   },
 
   /**

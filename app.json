@@ -1,6 +1,5 @@
 {
   "pages":[
-    "pages/admin/index",
     "pages/start/start",
     "pages/index/index",
     "pages/addCgi/addCgi",
@@ -8,7 +7,8 @@
     "pages/notice/show",
     "pages/map/map",
     "pages/personSignupList/list",
-    "pages/qrcode/qrsign"
+    "pages/qrcode/qrsign",
+    "pages/admin/index"    
     
   ],
   "window":{
