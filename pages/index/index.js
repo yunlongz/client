@@ -36,7 +36,8 @@ Page({
     isSignupEnd: [false, false, false, false, false, false, false],
     serverDate: moment(),
     activityTemplateData: {},
-    hiddenNotice:false
+    hiddenNotice:false,
+    managerFlag:0
   },
   tabClose:function(e){
     this.setData({
@@ -409,13 +410,25 @@ Page({
             // util.showSuccess('实名制')
           }
           else {
-            console.log(res)
+            console.log("userinfo",res)
             app.globalData.realname = res.data.result[0].realname
             app.globalData.department = res.data.result[0].department
+            let managerFlag = res.data.result[0].managerFlag
+            let managerFlagZh = ((res) => {
+              switch (managerFlag){
+                case '1' : return 'badminton'
+                case '2': return 'gasVollyball'
+                case '99' : return 'yoga'
+                default : 
+                  return 0
+              }
+             })(res)
+            console.log(managerFlagZh)
             that.setData({
               hasRealName: true,
               realName: res.data.result[0].realname,
-              department: res.data.result[0].department
+              department: res.data.result[0].department,
+              managerFlag: managerFlagZh
             })
           }
         },

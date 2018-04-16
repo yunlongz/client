@@ -16,7 +16,12 @@ Page({
     peroidEnd:'',
     activitySite:[],
     activityList:[],
-    title:"羽毛球"
+    title:"",
+    primarySize: 'default',
+    warnSize: 'default',
+    disabled: false,
+    plain: false,
+    loading: false
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -66,6 +71,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    console.log(options)
+
     wx.request({
       url: config.service.getServerDateUrl,
       success: (res)=>{
@@ -87,7 +95,7 @@ Page({
           timeEndList = [],
           activitySite = [];
            
-        res.data['yoga'].map((item,i)=>{
+        res.data[options.id].map((item,i)=>{
           
           activityDay.push(item.activityid - 1)
           timeStartList.push(item.activityStartTime)
@@ -96,11 +104,12 @@ Page({
         })
         console.log(res)
         this.setData({
-          activityList:res.data['yoga'],
+          activityList: res.data[options.id],
           activityDay: activityDay,
           timeStartList: timeStartList,
           timeEndList: timeEndList,
-          activitySite: activitySite
+          activitySite: activitySite,
+          title: res.data[options.id][0].title
         })
       }
     })

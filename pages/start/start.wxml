@@ -16,7 +16,7 @@
         <view class="confirm-btn" bindtap='goToIndex'>
           <text >进入活动</text>
         </view>
-        <text class="copyright">代码贡献者 @zhouyunlong</text>
+        <text class="copyright">代码贡献者 @zhouyunlong／wuyifeng</text>
       </view>
     </view>
   </block>

@@ -39,7 +39,7 @@
           <input name="activitySite" value='{{itemName.activitySite}}' />
         </view>
         <view class="btn-area">
-          <button formType="submit" id="{{itemName.id}}">修改</button>
+          <button type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" formType="submit" id="{{itemName.id}}">修改</button>
         </view>
       </form>
 

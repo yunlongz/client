@@ -32,7 +32,8 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  padding-left: 30rpx
+  padding: 0 30rpx;
+  justify-content: space-between
 }
 .section-address{
    background: white;
@@ -77,4 +78,7 @@
 }
 .activity-box{
   margin-bottom: 50rpx
+}
+.btn-area{
+  padding:  20rpx
 }

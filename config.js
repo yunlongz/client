@@ -3,9 +3,9 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://7bgpkgeo.qcloud.la';
+// var host = 'https://7bgpkgeo.qcloud.la';
 //生产环境request域名
-// var host = 'https://953500312.cksign.club'
+var host = 'https://953500312.cksign.club'
 var config = {
 
   // 下面的地址配合云端 Demo 工作
@@ -62,7 +62,7 @@ var config = {
 
   },
 
-  departments: ['CRM', '托管', '网点渠道', 'CSR', '产品', '技术管理处', '测试与推广支持处', '综合部','中心领导'],
+  departments: ['中心领导','CRM', '托管', '网点渠道', 'CSR', '产品', '技术管理处', '测试与推广支持处', '综合管理部','需求分析处','项目处'],
   categories: [
     { name: "羽毛球", id: 0, enName: 'badminton' },
     { name: "气排球", id: 1, enName: 'gasVolleyball' },
