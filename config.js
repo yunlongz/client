@@ -3,7 +3,7 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-// var host = 'https://7bgpkgeo.qcloud.la';
+//var host = 'https://7bgpkgeo.qcloud.la';
 //生产环境request域名
 var host = 'https://953500312.cksign.club'
 var config = {
@@ -69,10 +69,10 @@ var config = {
     { name: "篮球", id: 2, enName: 'basketball' },
     { name: "瑜伽", id: 3, enName: 'yoga' },
     { name: "舞蹈", id: 4, enName: 'dance' },
-    // { name: "桌游", id: 3 },
-    // { name: "乒乓球", id: 4 },
-    // { name: "足球", id: 5 },
-    // { name: "台球", id: 6 },
+    { name: "桌游", id: 5, enName: 'tableplay' },
+    { name: "乒乓球", id: 6, enName: 'pingpang' },
+    { name: "足球", id: 7, enName: 'football' },
+    { name: "台球", id: 8, enName: 'tableball' },
   ],
   // activityTemplateData: {
   //   badminton: [{
